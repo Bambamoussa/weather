@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/feature/weather/presentation/cubit/weather_cubit.dart';
 import 'package:weather_app/feature/weather/presentation/widget/city_list.dart';
 import 'package:weather_app/feature/weather/presentation/widget/generic_error_widget.dart';
-import 'package:weather_app/feature/weather/presentation/widget/loading_screen.dart';
+import 'package:weather_app/feature/weather/presentation/widget/message_widget.dart';
 import '../../../../di/injection_container.dart' as di;
 
 class WeatherCityList extends StatefulWidget {
@@ -22,11 +22,6 @@ class _WeatherCityListState extends State<WeatherCityList> {
     _weatherCubit.fetchWeathers();
   }
 
-  @override
-  void dispose() {
-    _weatherCubit.close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +29,7 @@ class _WeatherCityListState extends State<WeatherCityList> {
         create: (context) => _weatherCubit,
         child: BlocBuilder<WeatherCubit, WeatherState>(
           builder: (context, state) => state.map(
-            loading: (_) =>  LoadingScreen(),
+            loading: (_) =>  MessageWidget(),
             loaded: (data) =>  CityList(weatherList: data.weatherList),
             error: (error) => GenericError(failure: error.failure) ,
           ),

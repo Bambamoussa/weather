@@ -14,6 +14,9 @@ void _featureWeather() {
     // UseCases
     ..injectUseCase< WeatherUseCases>(() => WeatherUseCases(sl()))
     //Cubit
-    ..injectCubit<WeatherCubit>(() => WeatherCubit(weatherUseCases: sl()));
+    ..injectCubit<WeatherCubit>(() => WeatherCubit(weatherUseCases: sl()))
+
+    ..injectCubit<MessageCubit>(() =>  MessageCubit())
+    ..injectCubit<WeatherDetailsCubit>(() =>  WeatherDetailsCubit());
     
 }
